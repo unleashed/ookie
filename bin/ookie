@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+#
+# Ookie Ook! language interpreter - http://ook.heroku.com
+# Copyright (c) 2010 Alejandro Martinez Ruiz <alex at@ flawedcode dot. org>
+# See LICENSE.txt for licensing terms.
+#
+# Language info at http://www.dangermouse.net/esoteric/ook.html
+#
+# Ookie.run 'Ook. Ook! Ook! Ook? Ook! Ook. Ook! Ook! Ook? Ook!'
+#
+# As a program: ookie [-v] file.ook
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'ookie'
+
+def usage
+  STDERR.puts "Ookie Ook! interpreter #{Ookie::VERSION}\n\nUsage: #{File.basename $0} [-v] <file>"
+  exit 1
+end
+
+usage if ARGV[0].nil?
+
+arg = ARGV.shift
+verbose = arg == '-v'
+arg = ARGV.shift if verbose
+
+usage if arg.nil?
+
+begin
+  code = File.read arg
+rescue => ex
+  STDERR.puts "#{arg}: no such file"
+  exit 1
+end
+
+begin
+  ookie = Ookie::Interpreter.new(code)
+  ookie.verbose = verbose
+  ookie.run
+rescue => ex
+  STDERR.puts "program has errors: #{ex.message}"
+  exit 1
+end
+
+exit 0
