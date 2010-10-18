@@ -1,6 +1,17 @@
 = ookie
 
-Description goes here.
+ookie is an Ook! language interpreter written in Ruby, aimed at:
+
+* executing your classy Ook! code by embedding a shebang line:
+
+  #!/usr/bin/env ookie
+  << classy Ook! code >>
+
+* embedding your Ook! code as a String in your Ruby code
+
+  Ookie.run(%q{ just as classy Ook! code })
+
+You can test it behind a simple web interface at http://ook.heroku.com
 
 == Contributing to ookie
  

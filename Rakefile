@@ -13,8 +13,8 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "ookie"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Ookie is a simple Ook! interpreter}
+  gem.description = %Q{Ookie is a simple Ook! interpreter you can use to either directly execute your Ook! source code (via shebang) or embed it in your own Ruby programs}
   gem.email = "alex@flawedcode.org"
   gem.homepage = "http://github.com/unleashed/ookie"
   gem.authors = ["Alejandro Martinez Ruiz"]
