@@ -8,12 +8,13 @@
 # Ookie.run 'Ook. Ook! Ook! Ook? Ook! Ook. Ook! Ook! Ook? Ook!'
 #
 
-require 'ookie/version'
-require 'ookie/memoryarray'
-require 'ookie/interpreter'
-
 module Ookie
-  def self.run(*args)
-    Interpreter.run(*args)
+  module Version
+    MAJOR = 0
+    MINOR = 2
+    PATCH = 1
+    BUILD = nil
+
+    STRING = [MAJOR, MINOR, PATCH, BUILD].compact.join('.')
   end
 end

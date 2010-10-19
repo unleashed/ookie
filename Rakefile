@@ -10,9 +10,11 @@ end
 require 'rake'
 
 require 'jeweler'
+require './lib/ookie/version.rb'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "ookie"
+  gem.version = Ookie::Version::STRING
   gem.summary = %Q{Ookie is a simple Ook! interpreter}
   gem.description = %Q{Ookie is a simple Ook! interpreter you can use to either directly execute your Ook! source code (via shebang) or embed it in your own Ruby programs}
   gem.email = "alex@flawedcode.org"

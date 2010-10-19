@@ -14,7 +14,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'ookie'
 
 def usage
-  STDERR.puts "Ookie Ook! interpreter #{Ookie::VERSION}\n\nUsage: #{File.basename $0} [-v] <file>"
+  STDERR.puts "Ookie Ook! interpreter #{Ookie::Version::STRING}\n\nUsage: #{File.basename $0} [-v] <file>"
   exit 1
 end
 
