@@ -23,17 +23,16 @@ module Ookie
 
     attr_reader :ooks, :mem, :pc, :loops
     attr_writer :verbose
-    attr_accessor :ifd, :ofd, :code
+    attr_accessor :code, :ifd, :ofd, :efd
 
     def verbose(msg = nil)
-      STDERR.puts "#{self.class}: #{msg}" if @verbose and msg
+      @efd.puts "#{self.class}: #{msg}" if @verbose and msg
       @verbose
     end
 
-    def initialize(code = '', ifd = STDIN, ofd = STDOUT)
+    def initialize(code = '', ifd = STDIN, ofd = STDOUT, efd = STDERR)
       @verbose = false
-      @ifd, @ofd = ifd, ofd
-      @code = code
+      @code, @ifd, @ofd, @efd = code, ifd, ofd, efd
       reset!
     end
 
