@@ -16,10 +16,12 @@ module Ookie
     EndOfInstructions 	= Class.new(CodeInfo)
 
     CodeError		= Class.new(StandardError)
+    NoCode		= Class.new(CodeError)
     UnmatchedStartLoop	= Class.new(CodeError)
     UnmatchedEndLoop	= Class.new(CodeError)
-    NoOokCode		= Class.new(CodeError)
-    OddNumberOfOoks	= Class.new(CodeError)
+
+    OokCodeError	= Class.new(StandardError)
+    OddNumberOfOoks	= Class.new(OokCodeError)
 
     attr_reader :ooks, :mem, :pc, :loops
     attr_writer :verbose
@@ -136,7 +138,7 @@ module Ookie
 
     def parse_helper(re)
       @ooks = @code.scan(re).flatten
-      raise NoOokCode if @ooks.empty?
+      raise NoCode if @ooks.empty?
       @ooks = yield
     end
 
