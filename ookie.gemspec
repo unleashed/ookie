@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ookie}
-  s.version = "0.2.1"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alejandro Martinez Ruiz"]
-  s.date = %q{2010-10-19}
+  s.date = %q{2010-10-23}
   s.default_executable = %q{ookie}
   s.description = %q{Ookie is a simple Ook! interpreter you can use to either directly execute your Ook! source code (via shebang) or embed it in your own Ruby programs}
   s.email = %q{alex@flawedcode.org}
@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
     "lib/ookie/interpreter.rb",
     "lib/ookie/memoryarray.rb",
     "lib/ookie/version.rb",
+    "ookie.gemspec",
     "spec/ookie_spec.rb",
     "spec/spec_helper.rb"
   ]
