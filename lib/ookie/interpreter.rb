@@ -56,7 +56,7 @@ module Ookie
 
     def stepi
       insn = next_insn
-      if insn.empty?
+      if insn.nil?
         raise UnmatchedStartLoop unless @loops.empty?
         raise EndOfInstructions
       end
@@ -134,12 +134,13 @@ module Ookie
       @ooks = @code.scan(RE_OOK_CODE).flatten
       raise NoOokCode if @ooks.empty?
       raise OddNumberOfOoks if @ooks.size.odd?
+      @ooks = @ooks.each_slice(2).entries.collect! do |o|
+        o.join('_').downcase.gsub('!', 'x').gsub('?', 'q').gsub('.', 'd')
+      end
     end
 
     def next_insn
-      @ooks.slice(@pc*2, 2).join('_').downcase.gsub('!', 'x').gsub('?','q').gsub('.','d')
-    rescue NoMethodError	# happens when last instruction is an end loop
-      ''
+      @ooks[@pc]
     end
   end
 end
