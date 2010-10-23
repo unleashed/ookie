@@ -11,6 +11,7 @@
 module Ookie
   class Interpreter
     RE_OOK_CODE = /\s*(Ook[!?\.])\s*/
+    RE_BFK_CODE = /\s*([<>\+-\.,\[\]])\s*/
 
     CodeInfo		= Class.new(StandardError)
     EndOfInstructions 	= Class.new(CodeInfo)
@@ -147,6 +148,23 @@ module Ookie
         raise OddNumberOfOoks if @ooks.size.odd?
         @ooks.each_slice(2).entries.collect! do |o|
           o.join('_').downcase.gsub('!', 'x').gsub('?', 'q').gsub('.', 'd')
+        end
+      end
+    end
+
+    def parse_bfk
+      parse_helper(RE_BFK_CODE) do
+        @ooks.collect! do |b|
+          case b
+          when '>' then 'ookd_ookq'
+          when '<' then 'ookq_ookd'
+          when '+' then 'ookd_ookd'
+          when '-' then 'ookx_ookx'
+          when '.' then 'ookx_ookd'
+          when ',' then 'ookd_ookx'
+          when '[' then 'ookx_ookq'
+          else 'ookq_ookx'
+          end
         end
       end
     end
