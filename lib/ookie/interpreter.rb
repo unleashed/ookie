@@ -115,6 +115,10 @@ module Ookie
 
     private
 
+    def next_insn
+      @ooks[@pc]
+    end
+
     def skip_loop
       nesting = 1
       loop do
@@ -130,17 +134,20 @@ module Ookie
       end
     end
 
-    def parse
-      @ooks = @code.scan(RE_OOK_CODE).flatten
+    def parse_helper(re)
+      @ooks = @code.scan(re).flatten
       raise NoOokCode if @ooks.empty?
-      raise OddNumberOfOoks if @ooks.size.odd?
-      @ooks = @ooks.each_slice(2).entries.collect! do |o|
-        o.join('_').downcase.gsub('!', 'x').gsub('?', 'q').gsub('.', 'd')
+      @ooks = yield
+    end
+
+    def parse
+      parse_helper(RE_OOK_CODE) do
+        raise OddNumberOfOoks if @ooks.size.odd?
+        @ooks.each_slice(2).entries.collect! do |o|
+          o.join('_').downcase.gsub('!', 'x').gsub('?', 'q').gsub('.', 'd')
+        end
       end
     end
 
-    def next_insn
-      @ooks[@pc]
-    end
   end
 end
