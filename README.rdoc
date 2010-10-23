@@ -1,15 +1,21 @@
 = ookie
 
-ookie is an Ook! language interpreter written in Ruby, aimed at:
+ookie is an Ook! and Brainfuck language interpreter written in Ruby, aimed at:
 
-* executing your classy Ook! code by embedding a shebang line:
+* executing your classy Ook!/BF code by embedding a shebang line:
 
   #!/usr/bin/env ookie
-  << classy Ook! code >>
 
-* embedding your Ook! code as a String in your Ruby code
+  << classy code >>
 
-  Ookie.run(%q{ just as classy Ook! code })
+* executing your Ook!/BF code using the command line tool:
+
+  $ ookie mycode.ook	# => Ook! code
+  $ ookie mycode.b	# => Brainfuck code
+
+* embedding your Ook!/BF code as a String in your Ruby code
+
+  Ookie.run(%q{ just as classy Brainfuck code }, :bfk)
 
 You can test it behind a simple web interface at http://ook.heroku.com
 
