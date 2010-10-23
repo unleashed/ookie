@@ -26,7 +26,7 @@ module Ookie
 
     attr_reader :ooks, :mem, :pc, :loops
     attr_writer :verbose
-    attr_accessor :code, :ifd, :ofd, :efd, :lang
+    attr_accessor :code, :ifd, :ofd, :efd, :lang, :optimize
 
     def verbose(msg = nil)
       @efd.puts "#{self.class}: #{msg}" if @verbose and msg
@@ -37,6 +37,7 @@ module Ookie
       @verbose = false
       @code, @ifd, @ofd, @efd = code, ifd, ofd, efd
       @lang = :ook
+      @optimize = true
       reset!
     end
 
@@ -143,6 +144,7 @@ module Ookie
       @ooks = @code.scan(re).flatten
       raise NoCode if @ooks.empty?
       @ooks = yield
+      optimize if @optimize
     end
 
     def parse_ook
@@ -169,6 +171,31 @@ module Ookie
           end
         end
       end
+    end
+
+    def optimize
+      verbose "original code size = #{@ooks.size}"
+      optimize_helper([:optimize_nils])
+      verbose "optimized code size = #{@ooks.size}"
+    end
+
+    def optimize_helper(rules)
+      i = 0
+      while @ooks[i]  do
+        if rules.find { |r| send(r, @ooks[i], @ooks[i+1]) }
+          @ooks[i, 2] = []
+          i -= 1 unless i == 0
+        else
+          i += 1
+        end
+      end
+    end
+
+    def optimize_nils(i, j)
+      # this takes away innocuous operations, such as move right and then left
+      ops = [[i, j], [j, i]]
+      ops.include?(['ookd_ookq', 'ookq_ookd']) or
+        ops.include?(['ookd_ookd', 'ookx_ookx'])
     end
 
   end
