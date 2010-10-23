@@ -26,7 +26,7 @@ module Ookie
 
     attr_reader :ooks, :mem, :pc, :loops
     attr_writer :verbose
-    attr_accessor :code, :ifd, :ofd, :efd
+    attr_accessor :code, :ifd, :ofd, :efd, :lang
 
     def verbose(msg = nil)
       @efd.puts "#{self.class}: #{msg}" if @verbose and msg
@@ -36,6 +36,7 @@ module Ookie
     def initialize(code = '', ifd = STDIN, ofd = STDOUT, efd = STDERR)
       @verbose = false
       @code, @ifd, @ofd, @efd = code, ifd, ofd, efd
+      @lang = :ook
       reset!
     end
 
@@ -45,13 +46,14 @@ module Ookie
       @mem = MemoryArray.new
     end
 
-    def self.run(code)
-      new.run(code)
+    def self.run(code, lang = :ook)
+      new.run(code, lang)
     end
 
-    def run(code = nil)
+    def run(code = nil, lang = nil)
       @code = code if code
-      parse
+      @lang = lang if lang
+      send("parse_#@lang")
       loop { stepi }
     rescue EndOfInstructions
       verbose 'program finished correctly'
@@ -143,7 +145,7 @@ module Ookie
       @ooks = yield
     end
 
-    def parse
+    def parse_ook
       parse_helper(RE_OOK_CODE) do
         raise OddNumberOfOoks if @ooks.size.odd?
         @ooks.each_slice(2).entries.collect! do |o|
