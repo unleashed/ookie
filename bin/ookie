@@ -14,7 +14,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'ookie'
 
 def usage
-  STDERR.puts "Ookie Ook! interpreter #{Ookie::Version::STRING}\n\nUsage: #{File.basename $0} [-v] <file>"
+  STDERR.puts "Ookie Ook! & Brainfuck interpreter #{Ookie::Version::STRING}\n\nUsage: #{File.basename $0} [-v] <file>\n\n\t-v\t:= turn on verbose output\n\tfile\t:= any file, yet BF will only be used for .b files"
   exit 1
 end
 
