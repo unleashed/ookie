@@ -144,7 +144,7 @@ module Ookie
       @ooks = @code.scan(re).flatten
       raise NoCode if @ooks.empty?
       @ooks = yield
-      optimize if @optimize
+      optimize! if @optimize
     end
 
     def parse_ook
@@ -173,7 +173,7 @@ module Ookie
       end
     end
 
-    def optimize
+    def optimize!
       verbose "original code size = #{@ooks.size}"
       optimize_helper([:optimize_nils])
       verbose "optimized code size = #{@ooks.size}"
