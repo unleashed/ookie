@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ookie}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alejandro Martinez Ruiz"]
-  s.date = %q{2010-10-23}
+  s.date = %q{2010-11-12}
   s.default_executable = %q{ookie}
-  s.description = %q{Ookie is a simple Ook! interpreter you can use to either directly execute your Ook! source code (via shebang) or embed it in your own Ruby programs}
+  s.description = %q{Ookie is a simple Ook! and Brainfuck interpreter you can use to either directly execute your Ook! or BF source code (via shebang) or embed it in your own Ruby programs}
   s.email = %q{alex@flawedcode.org}
   s.executables = ["ookie"]
   s.extra_rdoc_files = [
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/unleashed/ookie}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Ookie is a simple Ook! interpreter}
+  s.summary = %q{Ookie is a simple Ook! and Brainfuck interpreter}
   s.test_files = [
     "spec/ookie_spec.rb",
     "spec/spec_helper.rb"
