@@ -130,7 +130,7 @@ module Ookie
       loop do
         @pc += 1
         insn = next_insn
-        raise UnmatchedStartLoop if insn.empty?
+        raise UnmatchedStartLoop if not insn or insn.empty?
         if insn == 'ookq_ookx'
           nesting -= 1
           break if nesting == 0
